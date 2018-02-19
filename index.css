@@ -1,9 +1,6 @@
-body {
-  height: 300px;
-  width: 250px;
-}
-.withImg {
+/* .canvasImg {
   background-image: url("./assets/Phantom-Football_Title-v1.jpg");
   background-size: 100% auto;
   background-repeat: no-repeat;
-}
+  z-index: 3;
+} */
