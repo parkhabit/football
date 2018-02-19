@@ -1,9 +1,9 @@
 var c;
 var ctx;
-var ballX = 141;
+var ballX = 150;
 var ballY = -5;
 var ballSpeedY = 3;
-var paddle = 105;
+var paddle = 130;
 var computerScore = 0;
 var message = "";
 var playAgain = "";
@@ -14,7 +14,7 @@ window.onload = function() {
   //image
   var img = new Image();
   img.onload = function() {
-    ctx.drawImage(img, 0, 0, 250, 300);
+    ctx.drawImage(img, 0, 0, 300, 250);
   };
   img.src = "./assets/Phantom-Football_Title-v1.jpg";
   var framesPerSecond = 30;
@@ -25,8 +25,6 @@ window.onload = function() {
         moveEverything();
         drawEverything();
       }, 1000 / framesPerSecond);
-    } else {
-      console.log("nothing");
     }
   });
 };
@@ -37,11 +35,11 @@ function moveEverything() {
   ballY = ballY + ballSpeedY;
 
   //if it touches the paddle you save it
-  if (ballY >= 210 && ballX - 20 <= paddle + 40 && ballX >= paddle - 20) {
+  if (ballY >= 160 && ballX - 20 <= paddle + 40 && ballX >= paddle - 20) {
     console.log("Good save");
     ballReset();
     //if it doesn't touch the paddle & is between the goal posts you miss
-  } else if (ballY > 270 && ballX > 25 && ballX < 260) {
+  } else if (ballY > 240 && ballX > 25 && ballX < 260) {
     console.log("Boo! You missed");
     ballReset();
     if (computerScore > 2) {
@@ -53,7 +51,7 @@ function moveEverything() {
           computerScore = 0;
           message = "";
           playAgain = "";
-          paddle = 105;
+          paddle = 130;
         }
       });
     } else {
@@ -61,7 +59,7 @@ function moveEverything() {
     }
 
     //if the ball is out of range
-  } else if (ballY > 300 || ballX >= 250 || ballX < 0) {
+  } else if (ballY > 250 || ballX >= 290 || ballX < 0) {
     console.log("Out of range");
     ballReset();
   }
@@ -79,20 +77,19 @@ function drawEverything() {
   ctx.fill();
   //keeper
   ctx.fillStyle = "#666";
-  ctx.fillRect(paddle, 230, 40, 20);
+  ctx.fillRect(paddle, 180, 40, 20);
   //goal
   ctx.strokeStyle = "#000";
-  ctx.strokeRect(25, 260, 200, 40);
+  ctx.strokeRect(50, 210, 200, 40);
   //scoring
   ctx.fillText(`Score : ${computerScore}`, 10, 10);
   //message
-  ctx.fillText(`${message}`, 100, 100);
-  ctx.fillText(`${playAgain}`, 60, 120);
+  ctx.fillText(`${message}`, 125, 100);
+  ctx.fillText(`${playAgain}`, 85, 120);
 }
 
 //motion of paddle-goalkeeper
-window.addEventListener("keydown", this.check, false);
-function check(e) {
+window.addEventListener("keydown", function(e) {
   //the paddle can't go out of the field
   if (paddle <= 0) {
     paddle = 5;
@@ -105,10 +102,10 @@ function check(e) {
   } else if (e.keyCode === 37) {
     paddle = paddle - 5;
   }
-}
+});
 
 //reset the ball to the beginning position
 function ballReset() {
-  ballX = Math.floor(Math.random() * 200);
+  ballX = Math.floor(Math.random() * 280);
   ballY = -5;
 }
